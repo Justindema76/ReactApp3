@@ -62,7 +62,7 @@ function PostList() {
                                 <div className="card-body">
                                     <h5 className="card-title">{post.title}</h5>
                                     <p className="card-text">By {post.name} on {new Date(post.publish_date).toLocaleDateString()}</p>
-                                    <Link to={`/post/${post.id}`} className="btn btn-primary">Read More</Link>
+                                    <Link to={`/post/${post.id}`} className="btn btn-danger">Read More</Link>
                                 </div>
                             </div>
                         </div>
