@@ -1,6 +1,4 @@
-// Post.jsx
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -19,7 +17,7 @@ const Post = () => {
             setLikeCount(post.likes);
             setDislikeCount(post.dislikes);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     };
 
@@ -28,31 +26,24 @@ const Post = () => {
             const response = await axios.get("https://api.ipify.org/?format=json");
             setIpAddress(response.data.ip);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     };
 
-    const handleLike = async () => {
+    const handleVote = async (type) => {
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/post.php/${id}/like/${ipAddress}`);
-            const likes = response.data.data;
-            setLikeCount(likes);
+            await axios.post(`${process.env.REACT_APP_API_BASE_URL}/post.php/${id}/${type}`, { ip: ipAddress });
+            if (type === "like") {
+                setLikeCount(likeCount + 1);
+            } else {
+                setDislikeCount(dislikeCount + 1);
+            }
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     };
 
-    const handleDislike = async () => {
-        try {
-            const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/post.php/${id}/dislike/${ipAddress}`);
-            const dislikes = response.data.data;
-            setDislikeCount(dislikes);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    React.useEffect(() => {
+    useEffect(() => {
         fetchPost();
         fetchIpAddress();
     }, []);
@@ -61,23 +52,33 @@ const Post = () => {
         return <div>Loading...</div>;
     }
 
+    // Split the recipe into an array if it’s a string
+    const recipeSteps = Array.isArray(post.recipe)
+        ? post.recipe
+        : post.recipe.split("\n").filter(step => step.trim() !== "");
+
     return (
         <div className="container my-4">
             <h1 className="mb-4">{post.title}</h1>
-            <p>{post.content}</p>
+            <h2 className="text-uppercase">Ingredients</h2>
+            <ul style={{ listStyleType: "none", padding: 0 }}>
+                {recipeSteps.map((step, index) => (
+                    <li key={index} style={{ marginBottom: "10px" }}>{step}</li>
+                ))}
+            </ul>
             <hr />
             <div className="d-flex justify-content-between">
                 <div>
-                    <button className="btn btn-outline-primary me-2" onClick={handleLike}>
+                    <button className="btn btn-outline-primary me-2" onClick={() => handleVote("like")}>
                         Like <span className="badge bg-primary">{likeCount}</span>
                     </button>
-                    <button className="btn btn-outline-danger" onClick={handleDislike}>
+                    <button className="btn btn-outline-danger" onClick={() => handleVote("dislike")}>
                         Dislike <span className="badge bg-danger">{dislikeCount}</span>
                     </button>
                 </div>
                 <div>
                     <small className="text-muted">
-                        Posted by {post.author} on {post.date}
+                        Posted by {post.name} on {post.date}
                     </small>
                 </div>
             </div>

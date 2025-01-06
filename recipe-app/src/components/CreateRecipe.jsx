@@ -4,8 +4,8 @@ import axios from 'axios';
 
 function CreateRecipe() {
     const [title, setTitle] = useState('');
-    const [recipe, setContent] = useState('');
-    const [name, setAuthor] = useState('');
+    const [recipe, setRecipe] = useState('');
+    const [name, setName] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(''); // State for storing the error message
 
@@ -40,8 +40,8 @@ function CreateRecipe() {
 
             // Reset form fields after successful submission
             setTitle('');
-            setContent('');
-            setAuthor('');
+            setRecipe('');
+            setName('');
 
             navigate('/');
         } catch (error) {
@@ -73,7 +73,7 @@ function CreateRecipe() {
                         className="form-control"
                         id="recipe"
                         value={recipe}
-                        onChange={(e) => setContent(e.target.value)}
+                        onChange={(e) => setRecipe(e.target.value)}
                         required
                     />
                 </div>
@@ -84,7 +84,7 @@ function CreateRecipe() {
                         className="form-control"
                         id="name"
                         value={name}
-                        onChange={(e) => setAuthor(e.target.value)}
+                        onChange={(e) => setName(e.target.value)}
                         required
                     />
                 </div>
