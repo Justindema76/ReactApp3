@@ -52,52 +52,64 @@ function CreateRecipe() {
     };
 
     return (
-        <div className="container mt-4">
-            <h2>Create a New Recipe</h2>
-            {error && <div className="alert alert-danger" role="alert">{error}</div>}
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <label htmlFor="title" className="form-label">Your Recipe Name</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="title"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="recipe" className="form-label">Recipe</label>
-                    <textarea
-                        className="form-control"
-                        id="recipe"
-                        value={recipe}
-                        onChange={(e) => setRecipe(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Name</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit" className="btn btn-primary" disabled={isLoading}>
-                    {isLoading ? (
-                        <span>
-                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            Creating post...
-                        </span>
-                    ) : 'Create Recipe'}
-                </button>
-            </form>
+        <div className="container mt-5">
+    <h2 className="text-center mb-4 text-danger">Create a New Recipe</h2>
+
+    {error && <div className="alert alert-danger" role="alert">{error}</div>}
+
+    <form onSubmit={handleSubmit} className="shadow-sm p-4 rounded bg-white border">
+        <div className="mb-4">
+            <label htmlFor="title" className="form-label font-weight-bold">Recipe Name</label>
+            <input
+                type="text"
+                className="form-control form-control-lg"
+                id="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+                placeholder="Enter your recipe name"
+            />
         </div>
+        
+        <div className="mb-4">
+            <label htmlFor="recipe" className="form-label font-weight-bold">Recipe Instructions</label>
+            <textarea
+                className="form-control form-control-lg"
+                id="recipe"
+                value={recipe}
+                onChange={(e) => setRecipe(e.target.value)}
+                required
+                placeholder="Enter your recipe instructions"
+                rows="6"
+            />
+        </div>
+
+        <div className="mb-4">
+            <label htmlFor="name" className="form-label font-weight-bold">Your Name</label>
+            <input
+                type="text"
+                className="form-control form-control-lg"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                placeholder="Enter your full name"
+            />
+        </div>
+
+        <div className="d-flex justify-content-center">
+            <button type="submit" className="btn btn-danger btn-lg" disabled={isLoading} style={{ minWidth: "150px" }}>
+                {isLoading ? (
+                    <span>
+                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Creating Recipe...
+                    </span>
+                ) : 'Create Recipe'}
+            </button>
+        </div>
+    </form>
+</div>
+
     );
 }
 

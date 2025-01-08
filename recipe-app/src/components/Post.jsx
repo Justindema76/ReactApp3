@@ -58,26 +58,35 @@ const Post = () => {
         : post.recipe.split("\n").filter(step => step.trim() !== "");
 
     return (
-        <div className="container my-4">
-            <h1 className="mb-4">{post.title}</h1>
-            <h2 className="text-uppercase">Ingredients</h2>
-            <ul style={{ listStyleType: "none", padding: 0 }}>
-                {recipeSteps.map((step, index) => (
-                    <li key={index} style={{ marginBottom: "10px" }}>{step}</li>
-                ))}
-            </ul>
-            <hr />
-            <div className="d-flex justify-content-between">
-                <div>
-                  
-                </div>
-                <div>
-                    <small className="text-muted">
-                        Posted by {post.name} on {post.date}
-                    </small>
-                </div>
-            </div>
+        <div className="container my-5">
+    <h1 className="mb-4 text-danger">{post.title}</h1>
+
+    <h2 className="text-uppercase mb-3" style={{ fontWeight: "bold", color: "#333" }}>Ingredients</h2>
+
+    <ul className="list-unstyled">
+        {recipeSteps.map((step, index) => (
+            <li key={index} className="mb-3" style={{ fontSize: "1.1rem", color: "#555" }}>
+                <i className="bi bi-check-circle" style={{ color: "#28a745", marginRight: "8px" }}></i>
+                {step}
+            </li>
+        ))}
+    </ul>
+
+    <hr style={{ borderColor: "#ddd", borderWidth: "1px" }} />
+
+    <div className="d-flex justify-content-between align-items-center">
+        <div>
+            {/* Placeholder for any potential content */}
         </div>
+
+        <div>
+            <small className="text-muted">
+                Posted by <strong>{post.name}</strong> on <em>{post.date}</em>
+            </small>
+        </div>
+    </div>
+</div>
+
     );
 };
 
