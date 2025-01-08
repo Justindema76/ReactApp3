@@ -69,12 +69,7 @@ const Post = () => {
             <hr />
             <div className="d-flex justify-content-between">
                 <div>
-                    <button className="btn btn-outline-primary me-2" onClick={() => handleVote("like")}>
-                        Like <span className="badge bg-primary">{likeCount}</span>
-                    </button>
-                    <button className="btn btn-outline-danger" onClick={() => handleVote("dislike")}>
-                        Dislike <span className="badge bg-danger">{dislikeCount}</span>
-                    </button>
+                  
                 </div>
                 <div>
                     <small className="text-muted">
