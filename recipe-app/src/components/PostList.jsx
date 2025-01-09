@@ -58,7 +58,7 @@ function PostList() {
             <table className="table">
                 <thead>
                     <tr>
-                        <th>Title</th>
+                        <th>Recipe</th>
                         <th>Chef</th>
                         <th>Publish Date</th>
                         <th>Actions</th>
